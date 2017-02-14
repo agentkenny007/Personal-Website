@@ -12,15 +12,15 @@ import { TestimonialsComponent } from './testimonials/testimonials.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '/home',          component: HomeComponent},
-  { path: '/about',         component: AboutComponent },
-  { path: '/blog',          component: BlogComponent },
-  { path: '/contact',       component: ContactComponent },
-  { path: '/hire',          component: HireComponent },
-  { path: '/portfolio',     component: PortfolioComponent },
-  { path: '/samples',       component: SamplesComponent },
-  { path: '/testimonials',  component: TestimonialsComponent },
-  { path: '/*',             component: HomeComponent }
+  { path: 'home',          component: HomeComponent},
+  { path: 'about',         component: AboutComponent },
+  { path: 'blog',          component: BlogComponent },
+  { path: 'contact',       component: ContactComponent },
+  { path: 'hire',          component: HireComponent },
+  { path: 'portfolio',     component: PortfolioComponent },
+  { path: 'samples',       component: SamplesComponent },
+  { path: 'testimonials',  component: TestimonialsComponent },
+  { path: '*',             component: HomeComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
