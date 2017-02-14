@@ -13,6 +13,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SamplesComponent } from './samples/samples.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 
+import { AppRoutingModule }     from './app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,8 @@ import { TestimonialsComponent } from './testimonials/testimonials.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
