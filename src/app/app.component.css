@@ -4,7 +4,7 @@
         url(../assets/fontsAvenir-Black.woff2) format("woff2"),
         url(../assets/fontsAvenir-Black.woff) format("woff"),
         url(../assets/fontsAvenir-Black.ttf) format("truetype"),
-        url(../assets/fontsAvenir-Black.svg#Avenir-Black) format("svg")
+        url(../assets/fontsAvenir-Black.svg#Avenir-Black) format("svg");
 }
 @font-face {
   font-family: 'Avenir-Book';
@@ -12,7 +12,7 @@
         url(../assets/fontsAvenir-Book.woff2) format("woff2"),
         url(../assets/fontsAvenir-Book.woff) format("woff"),
         url(../assets/fontsAvenir-Book.ttf) format("truetype"),
-        url(../assets/fontsAvenir-Book.svg#Avenir-Book) format("svg")
+        url(../assets/fontsAvenir-Book.svg#Avenir-Book) format("svg");
 }
 @font-face {
   font-family: 'Avenir-Heavy';
@@ -20,7 +20,7 @@
         url(../assets/fontsAvenir-Heavy.woff2) format("woff2"),
         url(../assets/fontsAvenir-Heavy.woff) format("woff"),
         url(../assets/fontsAvenir-Heavy.ttf) format("truetype"),
-        url(../assets/fontsAvenir-Heavy.svg#Avenir-Heavy) format("svg")
+        url(../assets/fontsAvenir-Heavy.svg#Avenir-Heavy) format("svg");
 }
 @font-face {
   font-family: 'Avenir-Light';
@@ -28,7 +28,7 @@
         url(../assets/fontsAvenir-Light.woff2) format("woff2"),
         url(../assets/fontsAvenir-Light.woff) format("woff"),
         url(../assets/fontsAvenir-Light.ttf) format("truetype"),
-        url(../assets/fontsAvenir-Light.svg#Avenir-Light) format("svg")
+        url(../assets/fontsAvenir-Light.svg#Avenir-Light) format("svg");
 }
 @font-face {
   font-family: 'Avenir-Medium';
@@ -36,7 +36,7 @@
         url(../assets/fontsAvenir-Medium.woff2) format("woff2"),
         url(../assets/fontsAvenir-Medium.woff) format("woff"),
         url(../assets/fontsAvenir-Medium.ttf) format("truetype"),
-        url(../assets/fontsAvenir-Medium.svg#Avenir-Medium) format("svg")
+        url(../assets/fontsAvenir-Medium.svg#Avenir-Medium) format("svg");
 }
 @font-face {
   font-family: 'Avenir-Roman';
@@ -44,5 +44,11 @@
         url(../assets/fontsAvenir-Roman.woff2) format("woff2"),
         url(../assets/fontsAvenir-Roman.woff) format("woff"),
         url(../assets/fontsAvenir-Roman.ttf) format("truetype"),
-        url(../assets/fontsAvenir-Roman.svg#Avenir-Roman) format("svg")
+        url(../assets/fontsAvenir-Roman.svg#Avenir-Roman) format("svg");
+}
+
+a { color: red; text-decoration: none; }
+a:hover { text-decoration: underline; }
+body {
+  font: 16px Avenir; color: white; background: black;
 }
