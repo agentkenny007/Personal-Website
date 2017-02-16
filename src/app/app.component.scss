@@ -46,9 +46,196 @@
         url(../assets/fontsAvenir-Roman.ttf) format("truetype"),
         url(../assets/fontsAvenir-Roman.svg#Avenir-Roman) format("svg");
 }
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -khtml-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    -ms-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+@mixin filter($filter) {
+    -webkit-filter: $filter;
+    filter: $filter;
+}
+@mixin placeholder($color) {
+    &::-webkit-input-placeholder { color: $color; opacity: 1 !important; }
+    &:-moz-placeholder { color: $color; }
+    &::-moz-placeholder {color: $color; }
+    &:-ms-input-placeholder {color: $color; }
+}
+@mixin transition($transition) {
+    // -webkit-transition: $transition;
+    // -moz-transition: $transition;
+    // -o-transition: $transition;
+    transition: $transition;
+}
+@mixin transition-deep($trans1, $trans2) {
+    // -webkit-transition: $trans1, $trans2;
+    // -moz-transition: $trans1, $trans2;
+    // -o-transition: $trans1, $trans2;
+    transition: $trans1, $trans2;
+}
+@mixin transition-delay($delay) {
+    // -webkit-transition-delay: $delay;
+    // -moz-transition-delay: $delay;
+    // -o-transition-delay: $delay;
+    transition-delay: $delay;
+}
+@mixin transition-duration($duration) {
+    // -webkit-transition-duration: $duration;
+    // -moz-transition-duration: $duration;
+    // -o-transition-duration: $duration;
+    transition-duration: $duration;
+}
+@mixin transition-property($property) {
+    // -webkit-transition-property: $property;
+    // -moz-transition-property: $property;
+    // -o-transition-property: $property;
+    transition-property: $property;
+}
+@mixin transition-timing-function($function) {
+    // -webkit-transition-timing-function: $function;
+    // -moz-transition-timing-function: $function;
+    // -o-transition-timing-function: $function;
+    transition-timing-function: $function;
+}
+@mixin transform($transformation) {
+    -webkit-transform: $transformation;
+    -moz-transform: $transformation;
+    -o-transform: $transformation;
+    -ms-transform: $transformation;
+    transform: $transformation;
+}
 
-a { color: red; text-decoration: none; }
-a:hover { text-decoration: underline; }
+a {
+  color: red; text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
 body {
   font: 16px Avenir; color: white; background: black;
 }
+html, body {
+  width: 100%; height: 100%; margin: 0;
+}
+nav {
+  position: fixed;
+  .nav-bar {
+    position: fixed;
+    top: 0;
+    right: -80px;
+    width: 79px;
+    height: 100%;
+    background: url(../assets/images/checker@gold.png);
+    border-left: 0.5px solid;
+    @include box-shadow(inset -5px 0 15px black);
+    @include filter(drop-shadow(-2px 0 5px black));
+    @include transition(transform 0.78s ease-out);
+    &.show {
+      @include transform(translate(-80px));
+    }
+  }
+}
+div.nav-toggle {
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid black;
+  @include transition(all 0.5s ease);
+  &:hover {
+    border: 1px solid;
+  }
+  @include box-shadow(1px 1px 3px black);
+  button {
+    @include transform(scale(0.7));
+    @include transition(all 0.25s ease);
+    padding: 13px 13px;
+    display: inline-block;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 2px solid transparent;
+    margin: 0;
+    overflow: visible;
+    outline: none;
+    .box {
+      width: 40px;
+      height: 24px;
+      display: inline-block;
+      position: relative;
+      span {
+        display: block;
+        top: 50%;
+        margin-top: -2px;
+        @include transition-duration(0.3s);
+        @include transition-timing-function(cubic-bezier(0.55, 0.055, 0.675, 0.19));
+      }
+      span, span::before, span::after {
+        width: 40px;
+        height: 4px;
+        background: red;
+        border-radius: 4px;
+        position: absolute;
+        @include transition-property(transform);
+        @include transition-duration(0.15s);
+        @include transition-timing-function(ease);
+        @include box-shadow(0 1px 2px rgba(0, 0, 0, .5));
+      }
+      span::before, span::after {
+        content: '';
+        display: block;
+      }
+      span::before {
+        top: -10px;
+        @include transition-deep(top 0.1s 0.34s ease-in, opacity 0.1s ease-in);
+      }
+      span::after {
+        bottom: -10px;
+        @include transition-deep(bottom 0.1s 0.34s ease-in, transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19));
+      }
+    }
+    &:hover {
+      // opacity: 0.7;
+      border: 2px solid white;
+      background: url(../assets/images/checker@gold0.5x.png) -4px;
+      .box {
+        span, span::before, span::after {
+          background: white;
+          @include box-shadow(0 1px 3px black);
+        }
+      }
+    }
+    &.active {
+      background: transparent;
+      padding: 20px 13px 16px 13px;
+      .box {
+        span {
+          @include transform(rotate(225deg));
+          @include transition-delay(0.56s);
+          @include transition-timing-function(cubic-bezier(0.215, 0.61, 0.355, 1));
+        }
+        span::before {
+          top: 0;
+          opacity: 0;
+          @include transition-deep(top 0.4s ease-out, opacity 0.4s 0.56s ease-out);
+        }
+        span::after {
+          bottom: 0;
+          @include transform(rotate(-90deg));
+          @include transition-deep(bottom 0.4s ease-out, transform 0.6s 0.56s cubic-bezier(0.215, 0.61, 0.355, 1));
+        }
+      }
+    }
+  }
+}
+#logo, .nav-menu { display: none; }
+
+@import 'app.component.mobile';
+@import 'app.component.tablet';
+@import 'app.component.desk';

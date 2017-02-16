@@ -1,0 +1,38 @@
+@media screen and (max-width: 800px) {
+    .display-for-desktop {
+        display: none;
+    }
+
+}
+@media screen and (min-width: 801px) {
+    .display-for-mobile {
+        display: none;
+    }
+}
+@media screen and (min-width: 1320px) {
+  section.tagline {
+    text-align: center;
+    h1 {
+      font-family: 'Avenir-Black';
+      letter-spacing: -12px;
+      font-size: 170px;
+      text-align: center;
+      margin: 0 0 -60px;
+    }
+    h2 {
+      font-weight: normal;
+      font-size: 35px;
+      margin: 0;
+      span {
+        font-weight: bold;
+      }
+    }
+    h3 {
+      font-size: 15px;
+      margin: 0;
+    }
+    span.def {
+      font-size: 20px;
+    }
+  }
+}
