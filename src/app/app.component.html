@@ -2,7 +2,16 @@
   <h1 id="logo">
     <a routerLink="/home">{{ '{[a]}' }}</a>
   </h1>
+  <div class="nav-toggle">
+    <button [ngClass]="{'active':navActive}"
+      (click)="navActive = !navActive"
+      (mouseenter)="navBarActive = true" (mouseleave)="navBarActive = navActive ? true : false">
+      <span class="box"><span></span></span>
+    </button>
+  </div>
   <nav>
+    <div class="nav-bar" [ngClass]="{'show':navBarActive}"></div>
+    <div class="nav-menu">
       <a routerLink="/home">home</a>
       <a routerLink="/about">about</a>
       <a routerLink="/blog">blog</a>
@@ -11,6 +20,7 @@
       <a routerLink="/portfolio">portfolio</a>
       <a routerLink="/samples">samples</a>
       <a routerLink="/testimonials">testimonials</a>
+    </div>
   </nav>
 </header>
 <main>
