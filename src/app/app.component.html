@@ -2,26 +2,29 @@
   <h1 id="logo">
     <a routerLink="/home">{{ '{[a]}' }}</a>
   </h1>
+  <nav>
+    <div class="nav-menu">
+      <div class="checks"></div>
+      <div class="links">
+        <a routerLink="/home" (click)="navActive = navBarActive = false; closeMenu()">home</a>
+        <a routerLink="/about" (click)="navActive = navBarActive = false; closeMenu()">about</a>
+        <a routerLink="/blog" (click)="navActive = navBarActive = false; closeMenu()">blog</a>
+        <a routerLink="/contact" (click)="navActive = navBarActive = false; closeMenu()">contact</a>
+        <a routerLink="/hire" (click)="navActive = navBarActive = false; closeMenu()">hire</a>
+        <a routerLink="/portfolio" (click)="navActive = navBarActive = false; closeMenu()">portfolio</a>
+        <a routerLink="/samples" (click)="navActive = navBarActive = false; closeMenu()">samples</a>
+        <a routerLink="/testimonials" (click)="navActive = navBarActive = false; closeMenu()">testimonials</a>
+      </div>
+    </div>
+    <div class="nav-bar" [ngClass]="{'show':navBarActive}"></div>
+  </nav>
   <div class="nav-toggle">
     <button [ngClass]="{'active':navActive}"
-      (click)="navActive = !navActive"
+      (click)="navActive = !navActive; navActive ? openMenu() : closeMenu ()"
       (mouseenter)="navBarActive = true" (mouseleave)="navBarActive = navActive ? true : false">
       <span class="box"><span></span></span>
     </button>
   </div>
-  <nav>
-    <div class="nav-bar" [ngClass]="{'show':navBarActive}"></div>
-    <div class="nav-menu">
-      <a routerLink="/home">home</a>
-      <a routerLink="/about">about</a>
-      <a routerLink="/blog">blog</a>
-      <a routerLink="/contact">contact</a>
-      <a routerLink="/hire">hire</a>
-      <a routerLink="/portfolio">portfolio</a>
-      <a routerLink="/samples">samples</a>
-      <a routerLink="/testimonials">testimonials</a>
-    </div>
-  </nav>
 </header>
 <main>
   <router-outlet></router-outlet>
