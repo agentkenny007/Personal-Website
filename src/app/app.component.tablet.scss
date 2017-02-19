@@ -1,0 +1,111 @@
+@media screen and (min-width: 1025px) {
+  nav .nav-menu .links a {
+    font-size: 150px;
+    line-height: 175px;
+  }
+  nav .nav-menu .links span.up {
+    right: 15px;
+    bottom: 125px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  nav .nav-menu .links a {
+    font-size: 135px;
+    line-height: 155px;
+  }
+  nav .nav-menu .links span.up {
+    right: 15px;
+    bottom: 125px;
+  }
+}
+@media screen and (max-width: 800px) {
+  #container {
+    margin-top: 50px;
+  }
+  nav {
+    .nav-bar {
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 49px;
+      background: url(../assets/images/checker@gold0.5x.png);
+      border-bottom: 0.5px solid;
+      &.show {
+        @include transform(translate(0, -50px));
+      }
+    }
+    .nav-menu {
+      .checks {
+        width: 107%;
+        div {
+          height: 52px;
+          span {
+            width: 52px;
+          }
+          &.e {
+            span {
+              &.e {
+                width: 50px;
+                height: 50px;
+              }
+            }
+          }
+          &.o {
+            span {
+              &.o {
+                width: 50px;
+                height: 50px;
+                @include box-shadow(0 0 15px 3px rgba(0, 0, 0, .5));
+              }
+            }
+          }
+        }
+      }
+      .links {
+        span {
+          width: 44px;
+          height: 25px;
+          background: url(../assets/images/arrow-up-down-mini.png);
+          @include filter(drop-shadow(0 3px 5px black));
+          &.down {
+            right: 10px;
+            top: 20px;
+          }
+          &.up {
+            background-position: bottom;
+          }
+        }
+      }
+    }
+  }
+  div.nav-toggle {
+    border: 1px solid white;
+    button {
+      padding: 7px 5px;
+      &.active {
+        padding: 10px 3px 6px 3px;
+        .box {
+          span, span::before, span::after {
+            background: white;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 745px) {
+  nav .nav-menu .links a {
+    font-size: 100px;
+    line-height: 120px;
+  }
+  nav .nav-menu .links span.up {
+    right: 7px;
+    bottom: 85px;
+  }
+}
+@media screen and (max-width: 540px) {
+  nav .nav-menu .links a {
+    font-size: 70px;
+    line-height: 90px;
+  }
+}

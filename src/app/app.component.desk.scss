@@ -1,0 +1,95 @@
+@media screen and (min-width: 801px) {
+  #container {
+    margin-top: 0;
+  }
+  nav {
+    .nav-bar {
+      left: inherit;
+      right: -80px;
+      width: 79px;
+      height: 100%;
+      background: url(../assets/images/checker@gold.png);
+      border-bottom: 0;
+      border-left: 0.5px solid;
+      @include box-shadow(inset -5px 0 15px black);
+      @include filter(drop-shadow(-2px 0 5px black));
+      &.show {
+        @include transform(translate(-80px));
+      }
+    }
+    .nav-menu {
+      .checks {
+        width: 100%;
+        div {
+          height: 72px;
+          span {
+            width: 72px;
+          }
+          &.e {
+            span {
+              &.e {
+                width: 70px;
+                height: 70px;
+              }
+            }
+          }
+          &.o {
+            span {
+              &.o {
+                width: 70px;
+                height: 70px;
+              }
+            }
+          }
+        }
+      }
+      .links {
+        margin-left: -40px;
+        span {
+          width: 100px;
+          height: 53px;
+          background: url(../assets/images/arrow-up-down.png);
+          &.down {
+            right: 180px;
+            top: 75px;
+          }
+          &.up {
+            right: 75px;
+            bottom: 145px;
+            background-position: bottom;
+          }
+        }
+      }
+    }
+  }
+  div.nav-toggle {
+    border: 1px solid black;
+    button {
+      padding: 13px;
+      &.active {
+        padding: 20px 13px 16px 13px;
+        .box {
+          span, span::before, span::after {
+            background: #EC4242;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 1100px) {
+  nav .nav-menu .links a {
+    font-size: 190px;
+    line-height: 220px;
+  }
+  nav .nav-menu .links span.up {
+    right: 15px;
+    bottom: 125px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  nav .nav-menu .links span.up {
+    right: 100px;
+    bottom: 30px;
+  }
+}
