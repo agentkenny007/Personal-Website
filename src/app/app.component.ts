@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
+import 'jquery-easing';
 
 @Component({
   selector: 'root',
@@ -8,17 +10,42 @@ import * as $ from 'jquery';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  navActive = false;
-  navBarActive = false;
+  navActive: boolean = false;
+  navBarActive: boolean = false;
+  route: ActivatedRoute;
+
+  constructor(public router: Router){
+    this.init();
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "NavigationEnd") {
+        let active: number, links: JQuery = $('.nav-menu .links a'), state: string = this.router.url;
+
+        if (links.hasClass('active')) links.removeClass('active');
+        switch (state) {
+          case '/home' : active = 0; break;
+          case '/about' : active = 1; break;
+          case '/blog' : active = 2; break;
+          case '/contact' : active = 3; break;
+          case '/hire' : active = 4; break;
+          case '/portfolio' : active = 5; break;
+          case '/samples' : active = 6; break;
+          case '/testimonials' : active = 7; break;
+        }
+        if (active != undefined) links[active].classList.add('active');
+      }
+    });
+  }
 
   makeChecks(grid: Array<number>): string {
-    let board = $('<figure>'), row = $('<div>'), check = $('<span>');
+    let board: JQuery = $('<figure>'), row: JQuery = $('<div>'), check: JQuery = $('<span>');
 
-    for (let i = 0, l = grid[1]; i < l; i++) {
-      let o = true, y = row.clone();
+    for (let i = 0, l:number = grid[1]; i < l; i++) {
+      let o:boolean = true, y:JQuery = row.clone();
+
       i % 2 == 0 ? y.addClass('o') : y.addClass('e');
-      for (let j = 0, k = grid[0]; j < k; j++) {
-        let x = check.clone();
+      for (let j = 0, k:number = grid[0]; j < k; j++) {
+        let x:JQuery = check.clone();
+
         if (i == 0 && j == 0){} else o ? x.addClass('o') : x.addClass('e'); o = !o;
         y.append(x);
       }
@@ -31,9 +58,24 @@ export class AppComponent {
 
   }
 
+  init(): void {
+    // this isn't working, why:
+    // $(document).on('click', '.nav-menu .links .up', function(){
+    //   alert('working');
+    //   $('.nav-menu .links').animate({ scrollTop: $(this).height() }, 1000);
+    // })
+  }
+
+  scrollMenu(to: string): void {
+    let links: JQuery = $('.nav-menu .links');
+
+    if (to == "bottom") links.animate({ scrollTop: links.find('div').height() - $(window).height() }, 1075, "easeInOutCirc");
+    else if (to == "top") links.animate({ scrollTop: 0 }, 1700, "easeOutBounce");
+  }
+
   openMenu(): void {
-    let w = $(window).width(), h = $(window).height(), c = w < 800 ? 40 : 72,
-        grid = [Math.floor(w/c), Math.ceil(h/c)], v = c * grid[1];
+    let w:number = $(window).width(), h:number = $(window).height(), c:number = w > 800 ? 72 : 52,
+        grid: number[] = [w > 800 ? Math.floor(w/c) : Math.ceil(w/c), Math.ceil(h/c)], v:number = c * grid[1];
 
     $('.nav-menu')
       .show().find('.checks')
@@ -43,5 +85,9 @@ export class AppComponent {
 
   closeMenu(): void {
     $('.nav-menu').hide().find('.checks').empty();
+  }
+
+  menuScrollable(): boolean {
+    return $(window).height() < $('.nav-menu .links div').height();
   }
 }
