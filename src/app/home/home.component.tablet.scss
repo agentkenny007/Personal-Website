@@ -1,0 +1,18 @@
+@media screen and (min-width: 641px) and (max-width: 750px) {
+  .slider ul li.slide {
+    .segment {
+      padding-top: 40px;
+      .headline {
+        font-size: 40px;
+      }
+    }
+    &.a {
+      .segment .headline {
+        max-width: 640px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 641px) and (max-width: 666px) {
+  .slider ul li.slide.b .segment .headline { font-size: 38px; }
+}
