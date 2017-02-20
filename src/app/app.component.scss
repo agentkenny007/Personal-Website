@@ -1,3 +1,6 @@
+$accent: #CD0000;
+$platelet: #EC4242;
+
 @font-face {
   font-family: 'Avenir-Black';
   src:  url(../assets/fonts/Avenir-Black.eot?#iefix) format("embedded-opentype"),
@@ -245,7 +248,7 @@ div.nav-toggle {
       span, span::before, span::after {
         width: 40px;
         height: 4px;
-        background: red;
+        background: $accent;
         border-radius: 4px;
         position: absolute;
         @include transition-property(transform);
@@ -300,6 +303,7 @@ div.nav-toggle {
   }
 }
 #logo { display: none; }
+.accent { color: $accent; }
 
 @import 'app.component.mobile';
 @import 'app.component.tablet';
