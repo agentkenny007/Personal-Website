@@ -17,7 +17,7 @@
       letter-spacing: -12px;
       font-size: 170px;
       text-align: center;
-      margin: 0 0 -60px;
+      margin: 45px 0 -60px;
     }
     h2 {
       font-weight: normal;
@@ -31,8 +31,21 @@
       font-size: 15px;
       margin: 0;
     }
-    span.def {
-      font-size: 20px;
+    span {
+      &.def {
+        font-size: 66px;
+        line-height: 66px;
+      }
+      &.syn {
+        display: block;
+        font-family: Avenir-Light;
+        font-style: italic;
+        margin: 1em 0;
+        span {
+          font-family: Avenir-Heavy;
+          font-style: normal;
+        }
+      }
     }
   }
 }
