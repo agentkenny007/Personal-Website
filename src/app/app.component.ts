@@ -13,6 +13,7 @@ export class AppComponent {
   navActive: boolean = false;
   navBarActive: boolean = false;
   route: ActivatedRoute;
+  timers: number[] = [];
 
   constructor(public router: Router){
     this.init();
@@ -36,22 +37,40 @@ export class AppComponent {
     });
   }
 
-  makeChecks(grid: Array<number>): string {
+  makeChecks(grid: Array<number>, callback?: any): JQuery {
     let board: JQuery = $('<figure>'), row: JQuery = $('<div>'), check: JQuery = $('<span>');
 
     for (let i = 0, l:number = grid[1]; i < l; i++) {
-      let o:boolean = true, y:JQuery = row.clone();
+      let o:boolean = true, y:JQuery = row.clone(), yM: string = "matrix";
 
-      i % 2 == 0 ? y.addClass('o') : y.addClass('e');
+      i % 2 == 0 ? y.addClass('o ' + yM) : y.addClass('e ' + yM);
+      this.timers.push(this.delayClass(y, yM, i * 450));
       for (let j = 0, k:number = grid[0]; j < k; j++) {
-        let x:JQuery = check.clone();
+        let x:JQuery = check.clone(), xM: string = "matrix";
 
-        if (i == 0 && j == 0){} else o ? x.addClass('o') : x.addClass('e'); o = !o;
+        if (i == 0 && j == 0){} else o ? x.addClass('o ' + xM) : x.addClass('e ' + xM); o = !o;
         y.append(x);
+        // callback(x, y);
+        this.timers.push(this.delayClass(x, xM, i * j * 45));
       }
       board.append(y);
     }
-    return board.html();
+    return board;
+  }
+
+  delayClass(elem: JQuery, className: string, delay: number): number {
+    // console.log(elem, delay, className)
+    let del = delay;
+    // if (del == 1907) console.log(elem);
+    return window.setTimeout(()=>{
+      console.log(elem, delay, className, elem.hasClass(className));
+      elem.removeClass(className);
+      console.log(elem, elem.hasClass(className));
+    }, delay);
+  }
+
+  randomMenuTransition(check: JQuery, row: JQuery): void {
+
   }
 
   spell(message: string, elem: any): void {
@@ -78,13 +97,18 @@ export class AppComponent {
         grid: number[] = [w > 800 ? Math.floor(w/c) : Math.ceil(w/c), Math.ceil(h/c)], v:number = c * grid[1];
 
     $('.nav-menu')
-      .show().find('.checks')
+      .show()
+      .find('.checks')
         .css("height", v)
         .append(this.makeChecks(grid));
+    setTimeout(()=>{ $('.nav-menu').addClass('open') }, 1);
   }
 
   closeMenu(): void {
-    $('.nav-menu').hide().find('.checks').empty();
+    $('.nav-menu').removeClass('open');
+    setTimeout(()=>{
+      $('.nav-menu').hide().find('.checks').empty();
+    }, 1000)
   }
 
   menuScrollable(): boolean {

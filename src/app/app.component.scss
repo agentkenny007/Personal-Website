@@ -116,14 +116,18 @@ $platelet: #EC4242;
 }
 
 a {
-  color: red; text-decoration: none;
-  &:hover { text-decoration: underline; }
+  color: red; text-decoration: none; border-bottom: 1px dotted darken($accent, 10%);
+  @include transition(all 0.618s ease);
+  &:hover { border-bottom-color: white; }
 }
 body {
   font: 16px Avenir; color: white; background: black;
 }
 html, body {
   width: 100%; height: 100%; margin: 0;
+}
+header {
+  position: relative; z-index: 10;
 }
 nav {
   position: fixed;
@@ -139,20 +143,42 @@ nav {
     top: 0;
     bottom: 0;
     width: 100%;
+    opacity: 0;
     background: red;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e50000+0,f73b3b+39,600000+100&1+5,0.5+20,1+90 */
     background: -moz-linear-gradient(top,  rgba(229,0,0,1) 0%, rgba(231,8,8,1) 5%, rgba(238,31,31,0.5) 20%, rgba(247,59,59,0.64) 39%, rgba(121,10,10,1) 90%, rgba(96,0,0,1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top,  rgba(229,0,0,1) 0%,rgba(231,8,8,1) 5%,rgba(238,31,31,0.5) 20%,rgba(247,59,59,0.64) 39%,rgba(121,10,10,1) 90%,rgba(96,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(229,0,0,1) 0%,rgba(231,8,8,1) 5%,rgba(238,31,31,0.5) 20%,rgba(247,59,59,0.64) 39%,rgba(121,10,10,1) 90%,rgba(96,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e50000', endColorstr='#600000',GradientType=0 ); /* IE6-9 */
+    @include transition(opacity 1s ease);
     .checks {
       height: 100%;
+      figure { margin: 0; }
       div {
         width: 100%;
+        opacity: 1;
+        @include transition(all 0.35s ease);
+        @include transform(matrix(0));
+        &.matrix {
+          @include transform(matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 400, 10, 1));
+          // @include transform(matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -300, -600, 10, 1));
+        }
         span {
           float: left;
           display: block;
           height: 100%;
+          opacity: 1;
+          @include transition(all 1.6s ease);
+          @include transform(matrix(0));
+          &.matrix {
+            opacity: 0;
+            // @include transform(matrix3d(-0.541675, 0.541675, -0.642788, 0, 0.707107, 0.707107, 0, 0, 0.454519, -0.454519, -0.766044, 0, 141.421, 141.421, 0, 1));
+            // @include transform(matrix3d(-0.541675, 0.541675, -0.642788, 0, 0.707107, 0.707107, 0, 0, 0.454519, -0.454519, -0.766044, 0, 50.5175, 232.325, 153.209, 1));
+            // @include transform(matrix3d(-0.541675, 0.541675, -0.642788, 0, 0.707107, 0.707107, 0, 0, 0.454519, -0.454519, -0.766044, 0, -199.468, 482.311, 574.533, 1));
+            // @include transform(matrix3d(-0.541675, 0.541675, -0.642788, 0, 0.707107, 0.707107, 0, 0, 0.454519, -0.454519, -0.766044, 0, 482.311, -199.468, -574.533, 1));
+            // @include transform(matrix3d(-0.541675, 0.541675, -0.642788, 0, 0.707107, 0.707107, 0, 0, 0.454519, -0.454519, -0.766044, 0, 781.697, 208.253, -638.812, 1));
+            @include transform(matrix3d(-0.541675, 0.541675, -0.642788, 0, 0.707107, 0.707107, 0, 0, 0.454519, -0.454519, -0.766044, 0, 99.9176, 890.032, 510.255, 1));
+          }
         }
         &.e {
           span {
@@ -164,6 +190,7 @@ nav {
             &.o {
               background: rgba(255, 255, 255, 0.25);
             }
+
           }
         }
         &.o {
@@ -193,9 +220,13 @@ nav {
         color: white;
         text-shadow: 0 1px 2px black, 0 3px 10px black, 0 5px 20px rgba(0, 0, 0, 0.5);
         font-family: Avenir-Light;
+        border: 0;
         &.active {
           font-family: Avenir-Black;
           font-weight: bold;
+        }
+        &:not(.active):hover {
+          text-decoration: underline;
         }
       }
       span {
@@ -207,6 +238,9 @@ nav {
           background-position: bottom;
         }
       }
+    }
+    &.open {
+      opacity: 1;
     }
   }
 }
