@@ -1,7 +1,7 @@
 @media screen and (min-width: 641px) and (max-width: 750px) {
   .slider ul li.slide {
     .segment {
-      padding-top: 40px;
+      &.a { padding-top: 40px; }
       .headline {
         font-size: 40px;
       }
