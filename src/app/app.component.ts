@@ -51,7 +51,7 @@ export class AppComponent {
         if (i == 0 && j == 0){} else o ? x.addClass('o ' + xM) : x.addClass('e ' + xM); o = !o;
         y.append(x);
         // callback(x, y);
-        this.timers.push(this.delayClass(x, xM, i * j * 45));
+        this.timers.push(this.delayClass(x, xM, (i || 0.75) * j * 45));
       }
       board.append(y);
     }
