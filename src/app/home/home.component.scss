@@ -93,7 +93,7 @@
           .still {
             width: 300px;
             height: 452px;
-            background: url(../assets/images/red-tie-profile-mobile.png);
+            background: url(../assets/images/red-tie-profile-mobile.png) no-repeat;
           }
           .buttons {
             button.about:hover {
@@ -107,12 +107,13 @@
         color: black;
         // clip-path: url(#slideMask);
         // clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 90%);
-        clip-path: polygon(0 74%, 100% 100%, 100% 100%, 0% 100%);
+        // clip-path: polygon(0 74%, 100% 100%, 100% 100%, 0% 100%);
+        clip-path: polygon(0 80%, 100% 55%, 100% 100%, 0 100%);
         .segment {
           .still {
             width: 394px;
             height: 1061px;
-            background: url(../assets/images/black-shirt-profile-mobile.png);
+            background: url(../assets/images/black-shirt-profile-mobile.png) no-repeat;
           }
           .buttons {
             button.about:hover {
