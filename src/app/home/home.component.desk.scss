@@ -1,0 +1,70 @@
+@media screen and (min-width: 1000px) {
+  .slider ul li.slide {
+    .segment {
+      &.a {
+        padding-top: 80px;
+      }
+      .headline {
+        font-size: 21px;
+        max-width: inherit !important;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1110px) {
+  .slider ul li.slide {
+    .segment {
+      .still {
+        margin-left: -128px;
+      }
+      .headline {
+        font-size: 24px;
+      }
+      .rodo {
+        padding: 2px 0;
+        font-size: 15px;
+      }
+    }
+    &.a {
+      .segment {
+        .still {
+          width: 642px;
+          height: 690px;
+          background: url(../assets/images/red-tie-profile.png) 92px 0 no-repeat;
+        }
+      }
+    }
+    &.b {
+      .segment {
+        .still {
+          width: 642px;
+          height: 1061px;
+          background: url(../assets/images/black-shirt-profile.png) no-repeat;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 1180px) {
+  .slider ul li.slide {
+    .segment {
+      .headline {
+        position: relative;
+        left: 50px;
+        font-size: 27px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1300px) {
+  .slider ul li.slide {
+    .segment {
+      .headline {
+        font-size: 30px;
+      }
+      .buttons {
+        top: 250px;
+      }
+    }
+  }
+}

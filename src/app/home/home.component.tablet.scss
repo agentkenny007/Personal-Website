@@ -1,4 +1,4 @@
-@media screen and (min-width: 641px) and (max-width: 750px) {
+@media screen and (min-width: 641px) and (max-width: 768px) {
   .slider ul li.slide {
     .segment {
       &.a { padding-top: 40px; }
@@ -15,4 +15,50 @@
 }
 @media screen and (min-width: 641px) and (max-width: 666px) {
   .slider ul li.slide.b .segment .headline { font-size: 38px; }
+}
+@media screen and (min-width: 696px) {
+  .slider ul li.slide {
+    .segment {
+      float: left;
+      &.a {
+        width: 61.8%;
+        padding-top: 20px;
+      }
+      &.b {
+        width: 38.2%;
+        padding-top: 20px;
+      }
+      .headline {
+        font-size: 26px;
+      }
+      .buttons {
+        right: 38.2%;
+        top: 240px;
+        button {
+          width: 258px;
+          margin: auto;
+        }
+      }
+      .rodo {
+        li {
+          padding: 5px 0;
+          font-size: 14px;
+        }
+      }
+      .still {
+        margin-left: -53px;
+      }
+    }
+    &.a {
+      .segment {
+        .headline {
+          max-width: 430px;
+        }
+        .still {
+          width: 394px;
+          background-position: 53px 0;
+        }
+      }
+    }
+  }
 }
