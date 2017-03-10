@@ -1,3 +1,33 @@
+@media screen and (max-width: 800px) {
+  .slider {
+    .slide-controls {
+      right: 20px;
+      top: 70px;
+    }
+    .slide-flip {
+      left: -20px;
+      bottom: -20px;
+      @include transform(scale(0.5));
+      &:hover {
+        @include transform(scale(0.675));
+      }
+    }
+  }
+}
+@media screen and (max-width: 696px) {
+  .slider .slide-controls {
+    left: 73px;
+    right: inherit;
+    top: inherit;
+    bottom: 135px;
+    &:hover {
+      @include transform(scale(0.675) translate(7px, -35px));
+    }
+  }
+}
+@media screen and (max-width: 696px) and (max-height: 720px) {
+  .slider ul li.slide .segment .buttons { display: none; }
+}
 @media screen and (min-width: 641px) and (max-width: 768px) {
   .slider ul li.slide {
     .segment {
@@ -37,6 +67,9 @@
         button {
           width: 258px;
           margin: auto;
+          &.contact {
+            width: 200px;
+          }
         }
       }
       .rodo {
