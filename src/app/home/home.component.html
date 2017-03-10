@@ -19,7 +19,7 @@
           <figure class="still"></figure>
         </div>
       </li>
-      <li class="slide b">
+      <li class="slide b" [ngClass]="{'revealed':flipped}" >
         <div class="segment a">
           <h2 class="headline">What’s up? My name is <span class="accent">Ikenna Asad</span>. </h2>
           <h2 class="headline">I’m a <span class="accent">Web Interface & Graphics Designer</span>.</h2>
@@ -47,6 +47,14 @@
         </clipPath>
       </defs>
     </svg>
+    <div class="slide-flip" ontouchstart="this.classList.toggle('hover');" [ngClass]="{'flipped':flipped}"
+      (click)="flipped = !flipped;">
+      <div class="coin"><div></div><div></div></div>
+    </div>
+    <div class="slide-controls">
+      <div class="slide-playing" [ngClass]="{'paused':!playing}"
+        (click)="playing = !playing; playing ? playSlider(true) : pauseSlider();"><div></div></div>
+    </div>
   </section>
   <section class="content">
     <ul class="site-links">
