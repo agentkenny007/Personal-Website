@@ -30,7 +30,8 @@
         .still {
           width: 642px;
           height: 690px;
-          background: url(../assets/images/red-tie-profile.png) 92px 0 no-repeat;
+          background: url(../assets/images/red-tie-profile.png) no-repeat;
+          margin-top: -4px;
         }
       }
     }
@@ -63,7 +64,7 @@
         font-size: 30px;
       }
       .buttons {
-        top: 250px;
+        top: 300px;
       }
     }
   }
