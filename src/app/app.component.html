@@ -24,7 +24,7 @@
   </nav>
   <div class="nav-toggle">
     <button [ngClass]="{'active':navActive}"
-      (click)="navActive = !navActive; navActive ? openMenu() : closeMenu();"
+      (click)="toggleMenu()"
       (mouseenter)="navBarActive = true" (mouseleave)="navBarActive = navActive ? true : false">
       <span class="box"><span></span></span>
     </button>

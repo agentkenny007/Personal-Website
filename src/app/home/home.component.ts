@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,9 @@ export class HomeComponent implements OnInit {
   flipped: boolean = false;
   interval: number = 0;
   playing: boolean = true;
+  activateMenu = false;
 
-  constructor() {
+  constructor(public app: AppComponent) {
     window.setTimeout(function(home){
       home.flipped = !home.flipped;
     }, 2000, this);

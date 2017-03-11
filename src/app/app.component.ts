@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import 'jquery-easing';
 
+// declare var skrollr: any;
+
 @Component({
   selector: 'root',
   templateUrl: './app.component.html',
@@ -109,6 +111,11 @@ export class AppComponent {
     setTimeout(()=>{
       $('.nav-menu').hide().find('.checks').empty();
     }, 1000)
+  }
+
+  toggleMenu(): void {
+    let activate = this.navActive = !this.navActive; // flip the value of global 'navActive' and store it in let 'activate'
+    activate ? this.openMenu() : this.closeMenu();
   }
 
   menuScrollable(): boolean {
