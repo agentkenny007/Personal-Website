@@ -14,6 +14,7 @@ import 'jquery-easing';
 export class AppComponent {
   navActive: boolean = false;
   navBarActive: boolean = false;
+  navAvailable: boolean = false;
   route: ActivatedRoute;
   timers: number[] = [];
 
@@ -115,7 +116,10 @@ export class AppComponent {
 
   toggleMenu(): void {
     let activate = this.navActive = !this.navActive; // flip the value of global 'navActive' and store it in let 'activate'
-    activate ? this.openMenu() : this.closeMenu();
+    if (activate) {
+      this.navBarActive = true;
+      this.openMenu();
+    } else this.closeMenu();
   }
 
   menuScrollable(): boolean {

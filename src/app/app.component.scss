@@ -172,8 +172,75 @@ nav {
         }
       }
     }
+    .about {
+      position: absolute;
+      left: 0;
+      right: 80px;
+      top: 0px;
+      height: 100%;
+      text-align: center;
+      padding: 35px;
+      overflow: auto;
+      h1 {
+        font-size: 75px;
+        margin: 0;
+        @include transform(translateY(-100px));
+      }
+      h2 {
+        font-size: 22px;
+        @include transform(translateY(-50px) scale(2));
+      }
+      h3 {
+        font-size: 50px;
+      }
+      p {
+        max-width: 700px;
+        text-align: justify;
+        margin: 30px auto;
+        font-size: 27px;
+        @include transform(translateY(150px) scale(0.6));
+      }
+      a {
+        border: 0;
+        &:hover {
+          text-decoration: underline;
+          color: black;
+          text-shadow: 0 0 2px white, 0 0 15px white;
+        }
+      }
+      & > div {
+        position: relative;
+        background: rgba(0, 0, 0, 0.785);
+        border: 1px solid #440000;
+        padding: 15px;
+        margin-bottom: 70px;
+        @include box-shadow(0 2px 7px 2px #150000);
+        * {
+          @include transition(all 0.8s ease);
+          opacity: 0;
+        }
+      }
+    }
     &.open {
       opacity: 1;
+      .about > div {
+        * { opacity: 1; }
+        h1 {
+          @include transform(translateY(0));
+          @include transition-delay(1s);
+        }
+        h2 {
+          @include transform(translateY(0) scale(1));
+          @include transition-delay(1.5s);
+        }
+        p {
+          @include transform(translateY(0) scale(1));
+          @include transition-delay(2s);
+          & + p {
+            @include transition-delay(2.5s);
+          }
+        }
+      }
     }
   }
 }
