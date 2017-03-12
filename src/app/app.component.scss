@@ -175,7 +175,7 @@ nav {
     .about {
       position: absolute;
       left: 0;
-      right: 80px;
+      right: 0;
       top: 0px;
       height: 100%;
       text-align: center;
@@ -188,20 +188,33 @@ nav {
       }
       h2 {
         font-size: 22px;
-        @include transform(translateY(-50px) scale(2));
+        @include transform(translateY(50px) scale(2));
       }
       h3 {
         font-size: 50px;
+        word-wrap: break-word;
+        @include transform(translateY(-650px) scale(5));
+        &:last-child {
+          @include transform(translateX(-250px) scale(0.75));
+        }
+      }
+      hr {
+        @include box-shadow(0 7px 5px black);
+        @include border-radius(50%);
+        @include transform(scaleX(0.175));
       }
       p {
         max-width: 700px;
         text-align: justify;
         margin: 30px auto;
-        font-size: 27px;
+        font-size: 17px;
+        text-shadow: 0 2px 2px black, 0 0 2px black, 0 0 2px black, 0 0 3px black, 0 0 4px black, 0 0 4px black, 0 2px 6px black;
         @include transform(translateY(150px) scale(0.6));
+        @include transition-duration(1.75s !important);
       }
       a {
         border: 0;
+        text-shadow: 0 2px 2px black, 0 0 2px black, 0 0 2px black, 0 0 3px black, 0 0 4px black, 0 0 4px black, 0 2px 6px black;
         &:hover {
           text-decoration: underline;
           color: black;
@@ -233,7 +246,20 @@ nav {
           @include transform(translateY(0) scale(1));
           @include transition-delay(1.5s);
         }
+        h3 {
+          @include transform(translateY(0) scale(1));
+          @include transition-delay(2.25s);
+          &:last-child {
+            @include transform(translateX(0) scale(1));
+            @include transition-delay(1.5s);
+          }
+        }
+        hr {
+          @include transform(scaleX(1));
+          @include transition-delay(1.725s);
+        }
         p {
+          font-size: 27px;
           @include transform(translateY(0) scale(1));
           @include transition-delay(2s);
           & + p {

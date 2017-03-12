@@ -76,6 +76,9 @@
           }
         }
       }
+      .about {
+        h3 { font-size: 38px; }
+      }
     }
   }
   div.nav-toggle {
@@ -101,11 +104,5 @@
   nav .nav-menu .links span.up {
     right: 7px;
     bottom: 85px;
-  }
-}
-@media screen and (max-width: 540px) {
-  nav .nav-menu .links a {
-    font-size: 70px;
-    line-height: 90px;
   }
 }
