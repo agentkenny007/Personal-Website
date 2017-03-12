@@ -9,15 +9,16 @@ import { AppComponent } from '../app.component';
 export class HomeComponent implements OnInit {
 
   flipped: boolean = false;
-  interval: number = 0;
+  interval: any;
   playing: boolean = true;
-  activateMenu = false;
 
   constructor(public app: AppComponent) {
-    window.setTimeout(function(home){
-      home.flipped = !home.flipped;
-    }, 2000, this);
-    this.playSlider();
+    if (this.playing) {
+      this.playSlider();
+      window.setTimeout(function(home){
+        home.flipped = !home.flipped;
+      }, 2000, this);
+    }
   }
 
   playSlider(flip?) {
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   pauseSlider() {
-    if (this.interval) window.clearInterval(this.interval);
+    window.clearInterval(this.interval);
   }
 
   ngOnInit() {
