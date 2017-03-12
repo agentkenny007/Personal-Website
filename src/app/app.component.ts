@@ -20,7 +20,7 @@ export class AppComponent {
 
   constructor(public router: Router){
     this.init();
-    this.router.events.subscribe(event => {
+    if (this.navAvailable) this.router.events.subscribe(event => {
       if (event.constructor.name === "NavigationEnd") {
         let active: number, links: JQuery = $('.nav-menu .links a'), state: string = this.router.url;
 
