@@ -139,7 +139,7 @@ div.nav-contact {
     margin-bottom: 100px;
     .social-link {
       display: inline-block;
-      width: 33%;
+      width: 44%;
       @include transition(all 0.75s ease);
       @include filter(brightness(1) drop-shadow(5px 0 20px black));
       img { max-width: 100%; }

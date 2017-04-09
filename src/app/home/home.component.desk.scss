@@ -4,6 +4,9 @@
     &:first-child + button { padding-right: 15%; }
   }
 }
+@media screen and (min-width: 888px) {
+  .contact-modal .follow .social-link { width: 33%; }
+}
 @media screen and (min-width: 925px) {
   .contact-modal .switches button:first-child { padding-left: 14%; }
 }
