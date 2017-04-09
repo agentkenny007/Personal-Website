@@ -36,7 +36,7 @@
     }
     .nav-menu {
       .checks {
-        width: 107%;
+        width: 115%;
         div {
           height: 52px;
           span {
@@ -92,6 +92,36 @@
             background: white;
           }
         }
+      }
+    }
+    &.contact {
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 0, 0, 0.75);
+      button.active {
+        background: rgba(255, 0, 0, 0.85);
+        border-color: black;
+        margin: -1px;
+        .box {
+          span, span::before, span::after {
+            @include transition-duration(1.5s);
+          }
+        }
+        &:active {
+          background: rgba(255, 0, 0, 0.85);
+          border-color: black;
+          @include transition(none);
+          @include box-shadow(0 0 5px white);
+          .box {
+            span, span::before, span::after {
+              background: black;
+              @include transition(none);
+            }
+          }
+        }
+      }
+      &:active {
+        background: white;
       }
     }
   }

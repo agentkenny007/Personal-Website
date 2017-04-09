@@ -1,4 +1,312 @@
 @import '../vars';
+@keyframes slide-up {
+  0% { opacity: 0; @include transform(translateY(200px)); }
+  to { opacity: 1; @include transform(translateY(0)); }
+}
+div.nav-contact {
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  padding: 0 5px;
+  background: rgba(255, 0, 0, 0.75);
+  border: 1px solid;
+  display: none;
+  z-index: 11;
+  opacity: 1;
+  @include transition(all 0.5s ease);
+  span {
+     background: url(../assets/images/connect.png);
+     display: block;
+     width: 100%;
+     height: 100%;
+     @include filter(invert(100%) drop-shadow(2px 0 5px));
+  }
+  &:hover, &:active {
+    border: 1px solid black;
+    background: rgba(255, 255, 255, 0.85);
+    span {
+      @include filter(drop-shadow(0 0 2px));
+    }
+  }
+  &.active {
+    opacity: 0;
+    cursor: default;
+  }
+  @include box-shadow(1px 1px 3px black);
+}
+.content { display: none; }
+.contact-modal {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transition: all 2.275s ease;
+  background: transparent url(../assets/images/transparent.png) 1000%/150%;
+  overflow: auto;
+  @mixin switchActive() {
+    color: white;
+    text-shadow: 5px 0 7px rgba(255, 255, 255, .5), 0 0 2px;
+    @include filter(drop-shadow(0 0 66px black));
+  }
+  .switches {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 1%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 0 1px 2px black;
+    z-index: 1;
+    @include transition(all 0.75s ease);
+    button {
+      cursor: pointer;
+      float: left;
+      outline: 0;
+      width: 50%;
+      background: url(../assets/images/checker-totalwhite.png);
+      border: 2px solid white;
+      font: 44px "Avenir-Black";
+      line-height: 36px;
+      padding-top: 12px;
+      text-shadow: -5px 0 5px rgba(0, 0, 0, .5), 0 0 2px;
+      @include box-shadow(0 5px 25px rgba(0, 0, 0, 0.675));
+      @include filter(drop-shadow(0 0 33px white));
+      @include transition(all 0.85s ease);
+      &:hover { @include switchActive(); }
+      &:first-child {
+        margin-right: 0;
+        text-align: left;
+        padding-left: 18%;
+        @include border-radius(25px 0 0 25px);
+        @include transform(translateX(-100%));
+        &:hover {
+          padding-left: 2%;
+          background: url(../assets/images/checker-totalblack.png) 100px 20px;
+        }
+      }
+      &:first-child + button {
+        text-align: right;
+        padding-right: 23%;
+        @include border-radius(0 25px 25px 0);
+        @include transform(translateX(100%));
+        &:hover {
+          padding-right: 2%;
+          background: url(../assets/images/checker-totalblack.png) -100px 20px;
+        }
+      }
+    }
+  }
+  .switchCase {
+    @include animation(slide-up 1.2s ease);
+  }
+  .connect {
+    overflow: auto;
+    margin: 20px 0 100px;
+    padding: 50px 0 30px;
+    .label {
+      float: left;
+      width: 38.2%;
+      text-align: right;
+      color: black;
+      font: 48px Avenir-Black;
+      text-shadow: 0 1px 3px;
+    }
+    .detail {
+      float: left;
+      width: 61.8%;
+      span {
+        display: inline-block;
+        word-break: break-word;
+        clear: both;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 5px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        margin: -5px 0 10px 15px;
+        font-size: 41px;
+        box-shadow: 1px 1px 3px rgba(45, 0, 0, 0.75);
+        @include filter(drop-shadow(0 0 15px black));
+      }
+    }
+  }
+  .follow {
+    overflow: auto;
+    text-align: center;
+    margin-bottom: 100px;
+    .social-link {
+      display: inline-block;
+      width: 33%;
+      @include transition(all 0.75s ease);
+      @include filter(brightness(1) drop-shadow(5px 0 20px black));
+      img { max-width: 100%; }
+      a { border: none; }
+      &:hover {
+        @include filter(brightness(0.75) drop-shadow(1px 0 1px white));
+      }
+      &.large {
+        width: 100%;
+      }
+    }
+  }
+  & > div {
+    overflow: auto;
+    position: relative;
+    min-height: 100%;
+  }
+  &.default {
+    .switches {
+      bottom: 50%;
+      padding: 4%;
+      button {
+        width: 48%;
+        line-height: 72px;
+        padding-top: 10px;
+        &:first-child {
+          margin-right: 4%;
+          @include border-radius(25px);
+        }
+        &:first-child + button {
+          @include border-radius(25px);
+        }
+      }
+    }
+  }
+  &.connect {
+    .details {
+      position: static;
+      visibility: visible;
+      opacity: 1;
+      height: auto;
+      @include transition(all 2s ease);
+    }
+    .mobile-buttons {
+      position: relative;
+      min-width: 100%;
+      min-height: 100vw;
+      background: url(../assets/images/checker-redmini.png) 0/20%;
+      margin: -30% 0;
+      padding: 0;
+      overflow: auto;
+      @include border-radius(100px);
+      @include transition(all 1.975s ease);
+      @include transform(scale(0.25) rotate(720deg));
+      a {
+        float: left;
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: url(../assets/images/transparent.png);
+        color: white;
+        font: 35px Avenir-Heavy;
+        margin-bottom: 15px;
+        padding-top: 10px;
+        border: 2px solid red;
+        opacity: 0;
+        // visibility: hidden;
+        @include border-radius(10px);
+      }
+      span {
+        position: absolute;
+        display: block;
+        visibility: visible;
+        z-index: 1;
+        cursor: pointer;
+        background: url(../assets/images/radio-tower-icon.png) center/contain no-repeat;
+        left: 10%;
+        right: 10%;
+        top: 10%;
+        bottom: 10%;
+        opacity: 1;
+        @include transition(all 1.775s ease);
+      }
+    }
+    .switches {
+      button {
+        &:first-child {
+          background: url(../assets/images/checker-totalblack.png) 100px 20px;
+          @include switchActive();
+        }
+      }
+    }
+  }
+  &.follow {
+    text-align: center;
+    .switches {
+      button {
+        &:first-child + button {
+          background: url(../assets/images/checker-totalblack.png) -100px 20px;
+          @include switchActive();
+        }
+      }
+    }
+  }
+  &.mobile {
+    .mobile-buttons {
+      min-width: 0%;
+      min-height: 0vw;
+      background: url(../assets/images/checker-totalblack.png) 0/7%;
+      margin: 0% 20px;
+      border: 1px solid rgba(75, 0, 0, 0.85);
+      box-shadow: 0 2px 3px darkred;
+      padding: 15px;
+      @include border-radius(0);
+      @include transition(all 2.75s ease);
+      @include transform(scale(1) rotate(0));
+      a {
+        background: url(../assets/images/checker-redmini.png) 3px 0;
+        opacity: 1;
+        // visibility: visible;
+        @include transition(all 2.75s ease);
+        &:last-child { margin: 0; }
+      }
+      span {
+        visibility: hidden;
+        opacity: 0;
+        z-index: 0;
+      }
+    }
+    .details {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+      height: 0;
+      @include transition(all 0.5s ease);
+    }
+    .connect { height: 100vh; }
+  }
+  &.open {
+    display: block;
+    &.connect {
+      background: url(../assets/images/checker-large-white.png) 1000px/75%;
+    }
+    &.mobile {
+      background: url(../assets/images/checker-large-red.png) 0 0/150%;
+      @include transition-duration(5s);
+    }
+    &.default {
+      background: black url(../assets/images/checker-large-red.png) center/25%;
+      span {
+        position: relative;
+        top: 40px;
+      }
+    }
+    &.follow {
+      background: url(../assets/images/checker-large-black.png) -1000px/75%;
+    }
+    .switches button {
+      &:first-child {
+        @include transform(translateX(0));
+      }
+      &:first-child + button {
+        @include transform(translateX(0));
+      }
+    }
+  }
+}
 .slider {
   text-align: center;
   ul {
@@ -27,10 +335,9 @@
             @include transition(all 0.7s ease);
             &.about {
               border: 2px solid white;
-              background: url(../assets/images/checker-translucidblack@gold0.5x.png);
               text-transform: uppercase;
               text-decoration: underline;
-              text-shadow: 0 0 2px black, 0 0 2px black, 0 2px 4px black, 0 2px 4px black, 0 2px 3px black;
+              text-shadow: 0 0 2px white, 0 0 2px white, 0 2px 4px red, 0 2px 3px pink, 0 2px 3px black;
               margin-bottom: 10px;
               color: $accent;
               font: 16px "Avenir-Heavy";
@@ -39,10 +346,10 @@
               @include border-radius(7px);
               @include box-shadow(0 2px 10px black);
               &:hover {
-                background: url(../assets/images/checker-redtransluciddark@gold0.5x.png);
-                background-position: -120px -30px;
+                background: url(../assets/images/checker-redmini.png) !important;
+                background-position: -120px -30px !important;
                 color: white;
-                border-color: $freespeach;
+                border-color: $freespeach !important;
               }
             }
             &.contact {
@@ -66,6 +373,12 @@
                 color: $accent;
                 background: white;
                 @include box-shadow(0 0 15px white);
+              }
+              &:active {
+                color: white;
+                background: black;
+                border-color: white;
+                @include transition(none);
               }
             }
           }
@@ -99,8 +412,11 @@
             background: url(../assets/images/red-tie-profile-mobile.png) no-repeat;
           }
           .buttons {
-            button.about:hover {
-              text-align: right;
+            button.about {
+              background: url(../assets/images/checker-totalwhite.png);
+              &:hover {
+                text-align: right;
+              }
             }
           }
         }
@@ -119,8 +435,13 @@
             background: url(../assets/images/black-shirt-profile-mobile.png) no-repeat;
           }
           .buttons {
-            button.about:hover {
-              text-align: left;
+            button.about {
+              background: url(../assets/images/checker-totalblack.png);
+              border-color: black;
+              color: white;
+              &:hover {
+                text-align: left;
+              }
             }
           }
         }

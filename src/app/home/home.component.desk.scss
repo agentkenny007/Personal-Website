@@ -1,4 +1,14 @@
+@media screen and (min-width: 801px) {
+  .contact-modal .switches button {
+    &:first-child { padding-left: 13%; }
+    &:first-child + button { padding-right: 15%; }
+  }
+}
+@media screen and (min-width: 925px) {
+  .contact-modal .switches button:first-child { padding-left: 14%; }
+}
 @media screen and (min-width: 1000px) {
+  .contact-modal .switches button:first-child + button { padding-right: 16%; }
   .slider ul li.slide {
     .segment {
       &.a {
@@ -57,6 +67,12 @@
     }
   }
 }
+@media screen and (min-width: 1170px) {
+  .contact-modal .switches button {
+    &:first-child { padding-left: 15%; }
+    &:first-child + button { padding-right: 17%; }
+  }
+}
 @media screen and (min-width: 1300px) {
   .slider ul li.slide {
     .segment {
@@ -65,6 +81,36 @@
       }
       .buttons {
         top: 300px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1370px) {
+  .contact-modal .switches button {
+    &:first-child { padding-left: 17%; }
+    &:first-child + button { padding-right: 18%; }
+  }
+}
+@media screen and (min-width: 1600px) {
+  .contact-modal .switches button:first-child + button { padding-right: 19%; }
+}
+@media screen and (min-width: 1800px) {
+  .contact-modal .switches button:first-child { padding-left: 18%; }
+}
+@media screen and (min-width: 2000px) {
+  .contact-modal .switches button:first-child + button { padding-right: 20%; }
+}
+@media screen and (max-width: 1000px) {
+  .contact-modal .connect {
+    .label, .detail {
+      width: 100%;
+      text-align: center;
+      float: none;
+    }
+    .detail {
+      margin-bottom: 40px;
+      span {
+        margin: 0 0 10px;
       }
     }
   }

@@ -24,7 +24,7 @@
           <h1>Ikenna <span class="accent">|</span> Asad&nbsp;</h1>
           <h2>/ɪkˈɛn·ə/ <span class="accent">or</span> /ˈɪk·ən·ə/ <span class="accent">|</span> /ˈə·səd/ <span class="accent">or</span> /əˈsɑd/</h2>
           <p>I like music, I like working with my hands, I love learning languages, and I'm interested in such a variety of different subjects it's almost insane. I like to tickle people. Not literally because it would make me extremely socially awkward if I went around literally tickling folks. But I like to tickle people in their minds and in their hearts, to make them laugh and sort of offer them a sense of comfort; to get them comfortable being around me and this insane world I live in.</p>
-          <p>I've been tinkering with graphics and web development since I was around 10 years old. I use languages like HTML, CSS, and JavaScript with products like Adobe Photoshop and Illustrator to convert the designs I create into semantically valid, high-performance code. Some of the mini projects I've been working on can be viewed on my blog site using the following link. The link after that will take you to the latest copy of my résumé.</p>
+          <p>I've been tinkering with graphics and web development since I was around 10 years old. I use languages like HTML, CSS, and JavaScript with products like Adobe Photoshop and Illustrator to convert the designs I create into semantically valid, high-performance code. Some of the mini projects I've been working on can be viewed on my blog site using the following link. The buttons underneath it will take you to the latest copies of my résumés.</p>
           <h3><a href="http://www.kreativkenn.com/portfolio/">www.kreativkenn.com/portfolio/</a></h3>
           <hr>
           <h3><a href="https://docs.google.com/document/d/1nEyTRuF9s6HVTJ6wAHE_NyVdhHT7uhVe51Xw8sWKweM/edit?usp=sharing">RÉSUMÉ!</a></h3>
@@ -33,15 +33,16 @@
     </div>
     <div class="nav-bar" [ngClass]="{'show':navBarActive}"></div>
   </nav>
-  <div class="nav-toggle">
-    <button [ngClass]="{'active':navActive}"
-      (click)="toggleMenu()"
-      (mouseenter)="navBarActive = true" (mouseleave)="navBarActive = navActive ? true : false">
+  <div class="nav-toggle"
+    [ngClass]="{'contact':contactActive,'inverse':invertToggle}"
+    (click)="toggleMenu(contactActive? 'contact' : null)"
+    (mouseenter)="navBarActive = contactActive ? false : true" (mouseleave)="navBarActive = contactActive ? false : navActive ? true : false">
+    <button [ngClass]="{'active':navActive}">
       <span class="box"><span></span></span>
     </button>
   </div>
 </header>
-<main>
+<main [ngClass]="{'touchable':touchable}">
   <router-outlet></router-outlet>
 </main>
 <br>
@@ -49,3 +50,11 @@
   © 2017 - Ikenna Asad |
   <a href="#">Site Map</a> | <a href="#">Style Guide</a>
 </footer>
+<div class="load-overlay fade-out">
+  <div class="loading">
+    <div>
+      <div><div></div></div>
+      <div><div></div></div>
+    </div>
+  </div>
+</div>

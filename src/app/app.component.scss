@@ -47,6 +47,10 @@
         url(../assets/fonts/Avenir-Roman.svg#Avenir-Roman) format("svg");
 }
 @import 'vars';
+@keyframes fade-out {
+  0% { visibility: visible; }
+  to { opacity: 0; }
+}
 a {
   color: red; text-decoration: none; border-bottom: 1px dotted darken($accent, 10%);
   @include transition(all 0.618s ease);
@@ -279,6 +283,10 @@ div.nav-toggle {
   &:hover {
     border: 1px solid;
   }
+  &:active {
+    background: rgba(255, 255, 255, 0.85);
+    @include transition(none);
+  }
   @include box-shadow(1px 1px 3px black);
   button {
     @include transform(scale(0.7));
@@ -298,6 +306,7 @@ div.nav-toggle {
       height: 24px;
       display: inline-block;
       position: relative;
+      @include transition(all 0.75s ease);
       span {
         display: block;
         top: 50%;
@@ -361,6 +370,22 @@ div.nav-toggle {
       }
     }
   }
+  &.contact {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid;
+    @include box-shadow(0 0 15px white);
+  }
+}
+div.load-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: black;
+  visibility: hidden;
+  z-index: 1000;
+  @include animation(fade-out 2575ms cubic-bezier(1,0.07,0.44,1) forwards);
 }
 #logo { display: none; }
 .accent { color: $accent; text-shadow: 0 1px 1px rgba(100, 0, 0, 0.5); }

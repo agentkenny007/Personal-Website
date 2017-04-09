@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import * as $ from 'jquery';
 import 'jquery-easing';
 
@@ -9,14 +10,20 @@ import 'jquery-easing';
   selector: 'root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class AppComponent {
+  contactActive: boolean = false;
+  invertToggle: boolean = false;
   navActive: boolean = false;
-  navBarActive: boolean = false;
   navAvailable: boolean = false;
+  navBarActive: boolean = false;
   route: ActivatedRoute;
   timers: number[] = [];
+  touchable: boolean = 'ontouchstart' in window;
 
   constructor(public router: Router){
     this.init();
@@ -47,33 +54,30 @@ export class AppComponent {
       let o:boolean = true, y:JQuery = row.clone(), yM: string = "matrix";
 
       i % 2 == 0 ? y.addClass('o ' + yM) : y.addClass('e ' + yM);
-      this.timers.push(this.delayClass(y, yM, i * 450));
+      this.timers.push(this.delayClass(y, yM, i * 450, this.timers.length));
       for (let j = 0, k:number = grid[0]; j < k; j++) {
         let x:JQuery = check.clone(), xM: string = "matrix";
 
         if (i == 0 && j == 0){} else o ? x.addClass('o ' + xM) : x.addClass('e ' + xM); o = !o;
         y.append(x);
         // callback(x, y);
-        this.timers.push(this.delayClass(x, xM, (i || 0.75) * j * 45));
+        this.timers.push(this.delayClass(x, xM, (i || 0.75) * j * 45, this.timers.length),);
       }
       board.append(y);
     }
     return board;
   }
 
-  delayClass(elem: JQuery, className: string, delay: number): number {
-    // console.log(elem, delay, className)
-    let del = delay;
-    // if (del == 1907) console.log(elem);
-    return window.setTimeout(()=>{
-      console.log(elem, delay, className, elem.hasClass(className));
-      elem.removeClass(className);
-      console.log(elem, elem.hasClass(className));
-    }, delay);
+  delayClass(elem: JQuery, className: string, delay: number, index: number): number {
+    return window.setTimeout(()=>{ elem.removeClass(className); this.timers[index] = null; }, delay);
   }
 
   randomMenuTransition(check: JQuery, row: JQuery): void {
 
+  }
+
+  onResize(event){
+    console.log(event.target.innerWidth, event.target.innerHeight);
   }
 
   spell(message: string, elem: any): void {
@@ -81,6 +85,7 @@ export class AppComponent {
   }
 
   init(): void {
+    $('.load-overlay').addClass('fade-out');
     // this isn't working, why:
     // $(document).on('click', '.nav-menu .links .up', function(){
     //   alert('working');
@@ -95,31 +100,44 @@ export class AppComponent {
     else if (to == "top") links.animate({ scrollTop: 0 }, 1700, "easeOutBounce");
   }
 
-  openMenu(): void {
-    let w:number = $(window).width(), h:number = $(window).height(), c:number = w > 800 ? 72 : 52,
-        grid: number[] = [w > 800 ? Math.floor(w/c) : Math.ceil(w/c), Math.ceil(h/c)], v:number = c * grid[1];
+  openMenu(type?: string): void {
+    if (type == "contact") {
+      $('.contact-modal').show();
+      setTimeout(()=>{ $('.contact-modal').addClass('open') }, 16);
+    } else {
+      let w:number = $(window).width(), h:number = $(window).height(), c:number = w > 800 ? 72 : 52,
+      grid: number[] = [w > 800 ? Math.floor(w/c) : Math.ceil(w/c), Math.ceil(h/c)], v:number = c * grid[1];
 
-    $('.nav-menu')
-      .show()
-      .find('.checks')
-        .css("height", v)
-        .append(this.makeChecks(grid));
-    setTimeout(()=>{ $('.nav-menu').addClass('open') }, 1);
+      $('.nav-menu')
+        .show()
+        .find('.checks')
+          .css("height", v)
+          .append(this.makeChecks(grid));
+      setTimeout(()=>{ $('.nav-menu').addClass('open') }, 16);
+    }
   }
 
-  closeMenu(): void {
-    $('.nav-menu').removeClass('open');
-    setTimeout(()=>{
-      $('.nav-menu').hide().find('.checks').empty();
-    }, 1000)
+  closeMenu(type?: string): void {
+    this.contactActive = false;
+    if (type == "contact") $('.contact-modal').hide().removeClass('open');
+    else {
+      let app = this;
+      $('.nav-menu').removeClass('open');
+      setTimeout(()=>{
+        $('.nav-menu').hide().find('.checks').empty();
+        app.timers.forEach(activeTimer => { if (activeTimer) window.clearTimeout(activeTimer) });
+        app.timers = [];
+      }, 1000)
+    }
   }
 
-  toggleMenu(): void {
+  toggleMenu(type?: string): void {
     let activate = this.navActive = !this.navActive; // flip the value of global 'navActive' and store it in let 'activate'
     if (activate) {
-      this.navBarActive = true;
-      this.openMenu();
-    } else this.closeMenu();
+      if (type == "contact") this.contactActive = true;
+      else this.navBarActive = true;
+      this.openMenu(type);
+    } else this.closeMenu(type);
   }
 
   menuScrollable(): boolean {

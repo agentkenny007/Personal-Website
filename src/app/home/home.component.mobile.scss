@@ -1,3 +1,21 @@
+@media screen and (max-width: 640px) {
+  .contact-modal .switches button {
+    &:first-child { padding-left: 15%; }
+    &:first-child + button { padding-right: 20%; }
+  }
+}
+@media screen and (max-width: 600px) {
+  .contact-modal .switches button {
+    &:first-child { padding-left: 8%; }
+    &:first-child + button { padding-right: 11%; }
+  }
+}
+@media screen and (max-width: 540px) {
+  .contact-modal .switches button {
+    &:first-child { padding-left: 6%; }
+    &:first-child + button { padding-right: 9%; }
+  }
+}
 @media screen and (min-width: 501px) and (max-width: 640px) {
   .slider ul li.slide {
     .segment {
@@ -24,6 +42,38 @@
     &.a {
       .segment .headline {
         max-width: 400px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .contact-modal {
+    .switches button {
+      &:first-child {
+        padding-left: 50%;
+      }
+      &:first-child + button { padding-right: 60%; }
+    }
+    &.default {
+      .switches {
+        margin-bottom: -15%;
+        button {
+          width: 100%;
+          margin-bottom: 5%;
+        }
+      }
+    }
+    &:not(.default) {
+      .switches button {
+        font-size: 25px;
+        line-height: 30px;
+        &:first-child {
+          padding-left: 14%;
+        }
+        &:first-child + button {
+          padding-right: 16%;
+          float: right;
+        }
       }
     }
   }

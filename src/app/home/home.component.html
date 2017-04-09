@@ -12,7 +12,7 @@
           </ul>
           <div class="buttons">
             <button class="about" (click)="app.toggleMenu()">more about me...</button>
-            <button class="contact">contact me now</button>
+            <button class="contact" (click)="app.toggleMenu('contact')">contact me now</button>
           </div>
         </div>
         <div class="segment b">
@@ -30,7 +30,7 @@
           </ul>
           <div class="buttons">
             <button class="about" (click)="app.toggleMenu()">more about me...</button>
-            <button class="contact">contact me now</button>
+            <button class="contact" (click)="app.toggleMenu('contact')">contact me now</button>
           </div>
         </div>
         <div class="segment b">
@@ -56,6 +56,48 @@
         (click)="playing = !playing; playing ? playSlider(true) : pauseSlider();"><div></div></div>
     </div>
   </section>
+  <section class="contact-modal"
+    [ngClass]="{'mobile':app.touchable&&connectMobile&&contactType!='follow','connect':contactType=='connect','follow':contactType=='follow','default':!contactType}">
+    <div [ngSwitch]="contactType">
+      <div class="switches">
+        <button (click)="contactType='connect'">connect</button>
+        <button (click)="contactType='follow'">follow</button>
+        <div *ngSwitchDefault class="default"><span>^ pick one ^</span></div>
+      </div>
+      <div *ngSwitchCase="'connect'" class="switchCase connect">
+        <div class="mobile-buttons" *ngIf="app.touchable">
+          <span (click)="connectMobile = true"></span>
+          <a href="tel:1-678-308-0880">Dial My Line</a>
+          <a href="sms:1-678-308-0880">Send a Text</a>
+          <a>Direct Message</a>
+          <a (click)="connectMobile = false">Other</a>
+        </div>
+        <div class="details">
+          <div class="label">Address:</div>
+          <div class="detail large"><span>1701 Martin Luther King JR DR NW</span><span>Atlanta, GA, 30314</span></div>
+          <div class="label">Direct line:</div>
+          <div class="detail"><span>678-308-0880</span></div>
+          <div class="label">Email/Allo/Duo:</div>
+          <div class="detail email"><span>ikennaugwuh@gmail.com</span></div>
+          <div class="label">FaceTime:</div>
+          <div class="detail email"><span>ikennaugwuh@me.com</span></div>
+          <div class="label">Skype:</div>
+          <div class="detail"><span>agentkenny007</span></div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'follow'" class="switchCase follow">
+        <div class="social-link large"><a href="https://www.linkedin.com/in/ikenna-ugwuh/" target="_blank"><img src="../assets/images/social-linkedin.png"></a></div>
+        <div class="social-link"><a href="https://twitter.com/agentkenny007" target="_blank"><img src="../assets/images/social-twitter.png"></a></div>
+        <div class="social-link"><a href="https://github.com/agentkenny007/" target="_blank"><img src="../assets/images/social-github.png"></a></div>
+        <div class="social-link"><a href="http://codepen.io/agentkenny007/" target="_blank"><img src="../assets/images/social-codepen.png"></a></div>
+        <div class="social-link"><a href="https://plus.google.com/+IkennaUgwuh007" target="_blank"><img src="../assets/images/social-googleplus.png"></a></div>
+        <div class="social-link"><a href="https://dribbble.com/agentkenny007" target="_blank"><img src="../assets/images/social-dribbble.png"></a></div>
+        <div class="social-link"><a href="http://agentkenny007.deviantart.com/" target="_blank"><img src="../assets/images/social-da.png"></a></div>
+        <div class="social-link"><a href="https://medium.com/@agentkenny007" target="_blank"><img src="../assets/images/social-medium.png"></a></div>
+        <div class="social-link"><a href="http://sharedli.st/agentkenny007" target="_blank"><img src="../assets/images/social-pocket.png"></a></div>
+      </div>
+    </div>
+  </section>
   <section class="content">
     <ul class="site-links">
       <li><h2>Latest Blog Posts</h2></li>
@@ -68,3 +110,6 @@
     </ul>
   </section>
 </div>
+<div class="nav-contact"
+  [ngClass]="{'active':app.navActive}"
+  (click)="app.navActive? return: app.toggleMenu('contact')"><span></span></div>
