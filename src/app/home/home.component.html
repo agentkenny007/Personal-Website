@@ -57,7 +57,7 @@
     </div>
   </section>
   <section class="contact-modal"
-    [ngClass]="{'mobile':app.touchable&&connectMobile&&contactType!='follow','connect':contactType=='connect','follow':contactType=='follow','default':!contactType}">
+    [ngClass]="{'mobile':(app.touchable&&connectMobile&&contactType!='follow')||showContactForm&&contactType!='follow','connect':contactType=='connect','follow':contactType=='follow','default':!contactType}">
     <div [ngSwitch]="contactType">
       <div class="switches">
         <button (click)="contactType='connect'">connect</button>
@@ -69,7 +69,7 @@
           <span (click)="connectMobile = true"></span>
           <a href="tel:1-678-308-0880">Dial My Line</a>
           <a href="sms:1-678-308-0880">Send a Text</a>
-          <a>Direct Message</a>
+          <a (click)="contactForm('open')">Direct Message</a>
           <a (click)="connectMobile = false">Other</a>
         </div>
         <div class="details">
@@ -83,7 +83,29 @@
           <div class="detail email"><span>ikennaugwuh@me.com</span></div>
           <div class="label">Skype:</div>
           <div class="detail"><span>agentkenny007</span></div>
+          <button class="contact" (click)="contactForm('open')">send message</button>
         </div>
+        <form class="contact-form">
+          <div class="name slide">
+            <input type="text" placeholder="Please, enter your name...">
+            <button class="next" (click)="contactForm('toEmail')">next</button>
+            <button class="edit" (click)="contactForm('close')">cancel</button>
+            <div class="error">
+              <span class="underline"></span>
+              <span class="message">click above the white line to enter your name</span>
+            </div>
+          </div>
+          <div class="email slide">
+            <input type="text" placeholder="and your email address?">
+            <button class="next" (click)="contactForm('toMessage')">next</button>
+            <button class="edit" (click)="contactForm('toName')">edit name</button>
+          </div>
+          <div class="message slide">
+            <textarea placeholder="ok, type your message." resize="none"></textarea>
+            <button class="next send" (click)="contactForm('toSend')">send</button>
+            <button class="edit" (click)="contactForm('toEmail')">edit email</button>
+          </div>
+        </form>
       </div>
       <div *ngSwitchCase="'follow'" class="switchCase follow">
         <div class="social-link large"><a href="https://www.linkedin.com/in/ikenna-ugwuh/" target="_blank"><img src="../assets/images/social-linkedin.png"></a></div>

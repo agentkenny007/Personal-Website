@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   interval: any;
   playing: boolean = true;
   connectMobile: boolean = this.app.touchable ? true : false;
+  showContactForm: boolean = false;
 
   constructor(public app: AppComponent) {
     if (this.playing) {
@@ -43,6 +44,21 @@ export class HomeComponent implements OnInit {
 
   pauseSlider() {
     window.clearInterval(this.interval);
+  }
+
+  contactForm(action) {
+    console.log('form something...');
+    switch (action) {
+      case 'close' : this.showContactForm = false; $('.contact-modal').removeClass('open-form'); break;
+      case 'open' : this.showContactForm = true; $('.contact-modal').addClass('open-form'); break;
+      case 'toName' : $('.contact-form').removeClass('to-email'); break;
+      case 'toEmail' : $('.contact-form').removeClass('to-msg').addClass('to-email'); break;
+      case 'toMessage' : $('.contact-form').removeClass('to-send').addClass('to-msg'); break;
+      case 'toSend' :
+        $('.contact-form').addClass('to-send');
+        break;
+      default: return;
+    }
   }
 
   ngOnInit() {

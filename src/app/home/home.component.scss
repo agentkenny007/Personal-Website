@@ -132,6 +132,104 @@ div.nav-contact {
         @include filter(drop-shadow(0 0 15px black));
       }
     }
+    .contact-form {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 300%;
+      height: 100%;
+      visibility: hidden;
+      @include transform(translateX(34%));
+      @include transition(all 1.75s cubic-bezier(1,0.24,0.13,0.78));
+      .slide {
+        position: relative;
+        float: left;
+        width: 33%;
+        height: 100%;
+        text-align: center;
+        button {
+          position: absolute;
+          cursor: pointer;
+          outline: 0;
+          @include border-radius(15px);
+          @include transition(all 0.85s ease);
+          &.edit {
+            text-transform: uppercase;
+            text-decoration: underline;
+            bottom: 25%;
+            background: url(../assets/images/transparent.png) -100px;
+            border: 1px dashed transparent;
+            outline: 0;
+            padding: 0 15px 4px;
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 1px darkred;
+            &:hover {
+              color: black;
+              text-shadow: 0 0 1px;
+              background: url(../assets/images/checker-totalwhite.png) 0/10px;
+              border: 1px solid white;
+              @include box-shadow(0 1px 5px rgba(0, 0, 0, 0.675));
+            }
+          }
+          &.next {
+            top: 10px;
+            right: -2px;
+            background: url(../assets/images/checker-totalwhite.png) 0/10px;
+            border: 1px solid white;
+            font: 24px "Avenir-Book";
+            padding: 5px 20px 5px 60px;
+            text-shadow: 0 1px 1px darkred;
+            @include box-shadow(0 1px 5px rgba(0, 0, 0, 0.675));
+            @include filter(drop-shadow(0 0 33px white));
+            &:hover {
+              background: url(../assets/images/checker-totalblack.png) 0/10px;
+              border-color: black;
+              color: red;
+              padding: 5px 5px 5px 20px;
+            }
+            &.send {
+              padding: 5px 20px;
+              font-size: 36px;
+              &:hover {
+                padding: 20px 20px 5px 20px;
+              }
+            }
+          }
+        }
+        input, textarea {
+          width: 100%;
+          box-sizing: border-box;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          margin-top: -100px;
+          padding: 15px 0;
+          color: black;
+          text-align: center;
+          background: transparent;
+          border: 0;
+          outline: 0;
+          font-size: 7vw;
+          resize: none;
+          @include placeholder(white, 0.5);
+          @include transition(all 1s ease);
+          @include filter(drop-shadow(0 4px 5px darken(darkred, 17%)));
+          &:hover {
+            @include placeholder(black, 0.5);
+            @include transform(scale(1.05));
+          }
+          &:focus { color: white; }
+          @include placeholder-focus(white, 1);
+        }
+        &.name button.edit { margin-left: -69px; }
+        &.email button.edit { margin-left: -86px; }
+        &.message button.edit { margin-left: -82px; }
+        &.error {
+          
+        }
+      }
+    }
   }
   .follow {
     overflow: auto;
@@ -182,6 +280,41 @@ div.nav-contact {
       opacity: 1;
       height: auto;
       @include transition(all 2s ease);
+      .contact {
+        cursor: pointer;
+        float: right;
+        margin: 30px;
+        width: 250px;
+        border: 2px solid #970000;
+        background: rgba(255,255,255,1);
+        background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,43,43,1) 8%, rgba(97,0,0,1) 90%, rgba(31,0,0,1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(8%, rgba(255,43,43,1)), color-stop(90%, rgba(97,0,0,1)), color-stop(100%, rgba(31,0,0,1)));
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,43,43,1) 8%, rgba(97,0,0,1) 90%, rgba(31,0,0,1) 100%);
+        background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,43,43,1) 8%, rgba(97,0,0,1) 90%, rgba(31,0,0,1) 100%);
+        background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,43,43,1) 8%, rgba(97,0,0,1) 90%, rgba(31,0,0,1) 100%);
+        background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,43,43,1) 8%, rgba(97,0,0,1) 90%, rgba(31,0,0,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#1f0000', GradientType=0 );
+        color: white;
+        font: 24px "Avenir-Light";
+        font-style: italic;
+        text-shadow: 0 0 1px #5D0000, 0 0 2px #5D0000, 0 2px 8px black, 0 1px 2px black;
+        padding: 12px;
+        outline: 0;
+        @include border-radius(12px);
+        @include box-shadow(0 2px 5px black);
+        @include transition(all 0.75s ease);
+        &:hover {
+          color: $accent;
+          background: black;
+          @include box-shadow(0 3.5px 15px black);
+        }
+        &:active {
+          color: black;
+          background: white;
+          border-color: red;
+          @include transition(none);
+        }
+      }
     }
     .mobile-buttons {
       position: relative;
@@ -303,6 +436,19 @@ div.nav-contact {
       }
       &:first-child + button {
         @include transform(translateX(0));
+      }
+    }
+  }
+  &.open-form {
+    .connect {
+      .contact-form {
+        visibility: visible;
+        @include transform(translateX(0));
+        &.to-email { @include transform(translateX(-33%)); }
+        &.to-msg { @include transform(translateX(-66%)); }
+      }
+      .details, .mobile-buttons {
+        @include transform(translateX(-110%));
       }
     }
   }
