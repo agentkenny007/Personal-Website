@@ -18,11 +18,17 @@
     -webkit-filter: $filter;
     filter: $filter;
 }
-@mixin placeholder($color) {
-    &::-webkit-input-placeholder { color: $color; opacity: 1 !important; }
-    &:-moz-placeholder { color: $color; }
-    &::-moz-placeholder {color: $color; }
-    &:-ms-input-placeholder {color: $color; }
+@mixin placeholder($color, $opacity) {
+    &::-webkit-input-placeholder { color: $color; opacity: $opacity }
+    &:-moz-placeholder { color: $color; opacity: $opacity }
+    &::-moz-placeholder { color: $color; opacity: $opacity }
+    &:-ms-input-placeholder { color: $color; opacity: $opacity }
+}
+@mixin placeholder-focus($color, $opacity) {
+  &:focus::-webkit-input-placeholder { color: $color; opacity: $opacity }
+  &:focus:-ms-input-placeholder { color: $color; opacity: $opacity }
+  &:focus::-moz-placeholder { color: $color; opacity: $opacity }
+  &:focus:-moz-placeholder { color: $color; opacity: $opacity }
 }
 @mixin transition($transition) {
     // -webkit-transition: $transition;
