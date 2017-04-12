@@ -132,6 +132,7 @@
               <span class="sending msg">sending message, please wait...</span>
               <span class="success msg">message sent, thanks!</span>
               <span class="err msg">error sending message :(</span>
+              <button class="retry" (click)="contactForm('toSend');">retry</button>
               <button class="edit" (click)="contactForm('toMessage');contactForm('close')">cancel</button>
           </div>
         </form>

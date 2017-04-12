@@ -285,9 +285,30 @@ div.nav-contact {
           .error { display: block; }
         }
         &.status {
-          button.edit {
-            margin-left: -69px;
-
+          button {
+            &.edit { margin-left: -69px; }
+            &.retry {
+              position: absolute;
+              display: none;
+              left: 50%;
+              top: 20%;
+              background: url(../assets/images/checker-redmini.png);
+              border: 2px solid #700000;
+              color: white;
+              font-size: 60px;
+              padding: 0 40px 10px;
+              margin-left: -110px;
+              box-shadow: 0 3px 5px #900000;
+              filter: drop-shadow(0 5px 20px pink);
+              text-shadow: 0 2px 2px #400000;
+              &:hover {
+                border-color: white;
+                @include box-shadow(0 15px 25px #900000);
+                @include transform(scale(1.25));
+                @include filter(drop-shadow(0 15px 60px pink));
+              }
+              &:active { background: black; @include transition(none); }
+            }
           }
           .msg {
             position: absolute;
@@ -364,8 +385,8 @@ div.nav-contact {
             button.edit { opacity: 0; visibility: hidden; }
           }
           &.error {
-            .sending { opacity: 0; visibility: hidden; }
-            .err { display: block; }
+            .loading, .sending { opacity: 0; visibility: hidden; }
+            .err, .retry { display: block; }
           }
         }
       }

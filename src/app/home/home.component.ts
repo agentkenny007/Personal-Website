@@ -9,11 +9,12 @@ import * as $ from 'jquery';
 })
 export class HomeComponent implements OnInit {
 
+  connectMobile: boolean = this.app.touchable ? true : false;
   contactType: string;
   flipped: boolean = false;
   interval: any;
   playing: boolean = true;
-  connectMobile: boolean = this.app.touchable ? true : false;
+  request: JQueryXHR;
   showContactForm: boolean = false;
   validateForm: (()=>boolean)[] = [
     () => { return $('.contact-form .slide:first-child input').val().trim().length > 1 },
@@ -53,7 +54,11 @@ export class HomeComponent implements OnInit {
 
   contactForm(action) {
     switch (action) {
-      case 'close' : this.showContactForm = false; $('.contact-modal').removeClass('open-form'); break;
+      case 'close' :
+        if (this.request) this.request.abort();
+        $('.contact-modal').removeClass('open-form');
+        this.showContactForm = false;
+        break;
       case 'open' : this.showContactForm = true; $('.contact-modal').addClass('open-form'); break;
       case 'reset' : $('.contact-form').removeClass().addClass('contact-form'); break;
       case 'toName' : $('.contact-form').removeClass('to-email'); break;
@@ -67,12 +72,38 @@ export class HomeComponent implements OnInit {
         break;
       case 'toSend' :
         if (this.validateForm[2]()) {
-          $('.contact-form').addClass('to-send');
-          // send email logic
+          $('.contact-form').addClass('to-send').find('.status').removeClass('error');
+          this.sendFormData().then(data => {
+            $('.contact-form .status').addClass('sent').parent().find('input, textarea').val('');
+            setTimeout(()=>{
+              this.contactForm('reset');
+              setTimeout(()=>{
+                $('.contact-form .status').removeClass('sent');
+                this.contactForm('close');
+              }, 1300);
+            }, 5000);
+          }, error => $('.contact-form .status').addClass('error'));
         } else $('.contact-form .slide:nth-child(3)').addClass('error');
         break;
       default: return;
     }
+  }
+
+  sendFormData() {
+    return this.request = $.ajax({
+      method: 'POST',
+      url: "https://postmail.invotes.com/send",
+      data: this.getFormData()
+    });
+  }
+
+  getFormData() {
+    return {
+      access_token: "frg04ozsjlnmaszcaej984ed",
+      subject: "Direct Message from: " + $('.contact-form input').eq(0).val(),
+      reply_to: $('.contact-form input').eq(1).val(),
+      text: $('.contact-form textarea').val()
+    };
   }
 
   validateInput(type) {
