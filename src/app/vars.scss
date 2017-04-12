@@ -2,6 +2,10 @@
     -webkit-animation: $animation;
     animation: $animation;
 }
+@mixin animation-delay($delay) {
+    -webkit-animation-delay: $delay;
+    animation-delay: $delay;
+}
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
     -moz-border-radius: $radius;

@@ -3,6 +3,19 @@
   0% { opacity: 0; @include transform(translateY(200px)); }
   to { opacity: 1; @include transform(translateY(0)); }
 }
+@keyframes slip-down {
+  0% { opacity: 0; @include transform(rotate(-30deg) translate(30px, -200px)); }
+  to { opacity: 1; @include transform(rotate(0) translate(0, 0)); }
+}
+@keyframes stretch { to { width: 75%; } }
+@keyframes strike-left {
+  0% { width: 0; @include transform(rotate(45deg) translate(-7px, -80px)); }
+  to { width: 100%; @include transform(rotate(45deg) translateY(-42px)); }
+}
+@keyframes strike-right {
+  0% { width: 0; @include transform(rotate(-45deg) translate(-5px, 0)); }
+  to { width: 100%; @include transform(rotate(-45deg) translateY(-68px)); }
+}
 div.nav-contact {
   cursor: pointer;
   position: fixed;
@@ -136,7 +149,7 @@ div.nav-contact {
       position: fixed;
       left: 0;
       top: 0;
-      width: 300%;
+      width: 400%;
       height: 100%;
       visibility: hidden;
       @include transform(translateX(34%));
@@ -144,7 +157,7 @@ div.nav-contact {
       .slide {
         position: relative;
         float: left;
-        width: 33%;
+        width: 25%;
         height: 100%;
         text-align: center;
         button {
@@ -164,6 +177,11 @@ div.nav-contact {
             font-size: 28px;
             color: rgba(255, 255, 255, 0.5);
             text-shadow: 0 2px 1px darkred;
+            &:focus {
+              background: black;
+              color: white;
+              border-color: white;
+            }
             &:hover {
               color: black;
               text-shadow: 0 0 1px;
@@ -173,8 +191,8 @@ div.nav-contact {
             }
           }
           &.next {
-            top: 10px;
-            right: -2px;
+            top: 57px;
+            right: 10px;
             background: url(../assets/images/checker-totalwhite.png) 0/10px;
             border: 1px solid white;
             font: 24px "Avenir-Book";
@@ -182,7 +200,7 @@ div.nav-contact {
             text-shadow: 0 1px 1px darkred;
             @include box-shadow(0 1px 5px rgba(0, 0, 0, 0.675));
             @include filter(drop-shadow(0 0 33px white));
-            &:hover {
+            &:focus, &:hover {
               background: url(../assets/images/checker-totalblack.png) 0/10px;
               border-color: black;
               color: red;
@@ -210,23 +228,141 @@ div.nav-contact {
           background: transparent;
           border: 0;
           outline: 0;
-          font-size: 7vw;
+          font-size: 7vw !important;
           resize: none;
           @include placeholder(white, 0.5);
-          @include transition(all 1s ease);
+          @include transition(all 1s ease !important);
           @include filter(drop-shadow(0 4px 5px darken(darkred, 17%)));
           &:hover {
             @include placeholder(black, 0.5);
             @include transform(scale(1.05));
           }
-          &:focus { color: white; }
+          &:focus {
+            color: white;
+            @include transform(scale(1));
+          }
           @include placeholder-focus(white, 1);
+          &::-webkit-autofill {
+            background: rgba(255, 0, 0, .45);
+          }
+        }
+        textarea {
+          height: 100%;
+          &.zoom-1 { top: 40%; font-size: 5vw !important; }
+          &.zoom-2 { top: 25%; font-size: 3vw !important; }
+          &.zoom-3 {
+            top: 0; margin-top: 0;
+            padding: 75px 0 160px;
+            font-size: 1.975vw !important;
+          }
+        }
+        .error {
+          position: absolute;
+          display: none;
+          left: 0;
+          top: 50%;
+          width: 100%;
+          p {
+            margin: 0.25em 0;
+            text-shadow: 0 1px 1px darken(darkred, 10%);
+            @include animation(slide-up 875ms cubic-bezier(1,0.07,0.44,1) forwards);
+          }
+          .underline {
+            display: inline-block;
+            width: 0;
+            height: 10px;
+            background: white;
+            @include transition(all 1.875s ease);
+            @include border-radius(3px);
+            @include box-shadow(0 1px 3px darken(darkred, 10%));
+            @include animation(stretch 875ms cubic-bezier(1,0.07,0.44,1) forwards);
+          }
         }
         &.name button.edit { margin-left: -69px; }
         &.email button.edit { margin-left: -86px; }
         &.message button.edit { margin-left: -82px; }
         &.error {
-          
+          .error { display: block; }
+        }
+        &.status {
+          button.edit { margin-left: -69px; }
+          .msg {
+            position: absolute;
+            display: block;
+            width: 100%;
+            top: 0;
+            padding-top: 25%;
+            font-size: 50px;
+            text-shadow: 0 3px 5px darken(darkred, 12%);
+            opacity: 1;
+            @include filter(drop-shadow(0 4px 12px black));
+            @include transition(all 0.875s ease);
+          }
+          .checkmark {
+            position: absolute;
+            top: 22%;
+            left: 50%;
+            height: 190px;
+            width: 300px;
+            margin: -140px 0 0 -115px;
+            display: none;
+            @include filter(drop-shadow(0 4px 12px darkred));
+            div {
+              position: relative;
+              float: left;
+              height: 100%;
+              overflow: hidden;
+              span {
+                position: absolute;
+                display: block;
+                width: 0;
+                height: 10px;
+                background: white;
+                bottom: 0;
+              }
+              &:first-child {
+                width: 38%;
+                span { @include animation(strike-left 750ms ease forwards); }
+              }
+              &:last-child {
+                width: 62%;
+                span {
+                  @include animation(strike-right 750ms ease forwards);
+                  @include animation-delay(375ms);
+                }
+              }
+            }
+          }
+          .loading {
+            position: absolute;
+            top: 22%;
+            height: 190px;
+            width: 190px;
+            margin: -95px;
+            opacity: 1;
+            @include animation(throbber-rotate 3478ms linear infinite);
+            @include filter(drop-shadow(0 4px 12px black));
+            @include transition(all 2s ease);
+            & > div {
+              border-color: white;
+            }
+            div div div {
+              border-width: 6px;
+              border-style: dashed;
+            }
+          }
+          .success, .err {
+            display: none;
+            @include animation(slip-down 1475ms forwards);
+          }
+          &.sent {
+            .sending, .loading { opacity: 0; visibility: hidden; }
+            .success, .checkmark { display: block; }
+          }
+          &.error {
+            .sending { opacity: 0; visibility: hidden; }
+            .err { display: block; }
+          }
         }
       }
     }
@@ -444,8 +580,9 @@ div.nav-contact {
       .contact-form {
         visibility: visible;
         @include transform(translateX(0));
-        &.to-email { @include transform(translateX(-33%)); }
-        &.to-msg { @include transform(translateX(-66%)); }
+        &.to-email { @include transform(translateX(-25%)); }
+        &.to-msg { @include transform(translateX(-50%)); }
+        &.to-send { @include transform(translateX(-75%)); }
       }
       .details, .mobile-buttons {
         @include transform(translateX(-110%));

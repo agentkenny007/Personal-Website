@@ -43,6 +43,9 @@
   .slider ul li.slide .segment .buttons { display: none; }
   div.nav-contact { display: block; }
 }
+@media screen and (max-width: 675px) {
+  .contact-modal .connect .contact-form .slide textarea.zoom-2 { font-size: 20px !important; }
+}
 @media screen and (min-width: 641px) and (max-width: 768px) {
   .slider ul li.slide {
     .segment {
@@ -119,23 +122,6 @@
       &.revealed {
         clip-path: polygon(0 0%, 100% -5%, 100% 93%, 0% 84%);
       }
-    }
-  }
-}
-@media screen and (max-width: 500px) {
-  .contact-modal .connect .detail.email span {
-    font-size: 30px;
-  }
-}
-@media screen and (max-width: 370px) {
-  .contact-modal .connect {
-    .detail, .detail.large, .detail.email {
-      span {
-        font-size: 24px;
-      }
-    }
-    .label {
-      font-size: 34px;
     }
   }
 }

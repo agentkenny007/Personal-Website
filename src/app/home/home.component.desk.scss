@@ -1,10 +1,11 @@
 @media screen and (min-width: 801px) {
   .contact-modal {
-    &.mobile .mobile-buttons { margin-top: 20px; }
+    .connect .contact-form .slide button.next { top: 10px; }
     .switches button {
       &:first-child { padding-left: 13%; }
       &:first-child + button { padding-right: 15%; }
     }
+    &.mobile .mobile-buttons { margin-top: 20px; }
   }
 }
 @media screen and (min-width: 888px) {
@@ -120,4 +121,7 @@
       }
     }
   }
+}
+@media screen and (max-width: 1000px) {
+  .contact-modal .connect .contact-form .slide textarea.zoom-3 { font-size: 20px !important; }
 }
