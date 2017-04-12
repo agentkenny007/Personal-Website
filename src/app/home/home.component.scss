@@ -285,7 +285,10 @@ div.nav-contact {
           .error { display: block; }
         }
         &.status {
-          button.edit { margin-left: -69px; }
+          button.edit {
+            margin-left: -69px;
+
+          }
           .msg {
             position: absolute;
             display: block;
@@ -358,6 +361,7 @@ div.nav-contact {
           &.sent {
             .sending, .loading { opacity: 0; visibility: hidden; }
             .success, .checkmark { display: block; }
+            button.edit { opacity: 0; visibility: hidden; }
           }
           &.error {
             .sending { opacity: 0; visibility: hidden; }
