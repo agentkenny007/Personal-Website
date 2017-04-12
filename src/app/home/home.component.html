@@ -87,23 +87,52 @@
         </div>
         <form class="contact-form">
           <div class="name slide">
-            <input type="text" placeholder="Please, enter your name...">
-            <button class="next" (click)="contactForm('toEmail')">next</button>
-            <button class="edit" (click)="contactForm('close')">cancel</button>
             <div class="error">
               <span class="underline"></span>
-              <span class="message">click above the white line to enter your name</span>
+              <p>click above the white line to enter your name</p>
             </div>
+            <input type="text" placeholder="Please, enter your name..." (keyup)="validateInput('name')" (keyup.enter)="contactForm('toEmail')">
+            <button class="next" (click)="contactForm('toEmail')">next</button>
+            <button class="edit" (click)="contactForm('close')">cancel</button>
           </div>
           <div class="email slide">
-            <input type="text" placeholder="and your email address?">
+            <div class="error">
+              <span class="underline"></span>
+              <p>please enter a valid email here</p>
+            </div>
+            <input type="text" placeholder="and your email address?" (keyup)="validateInput('email')" (keyup.enter)="contactForm('toMessage')">
             <button class="next" (click)="contactForm('toMessage')">next</button>
             <button class="edit" (click)="contactForm('toName')">edit name</button>
           </div>
           <div class="message slide">
-            <textarea placeholder="ok, type your message." resize="none"></textarea>
+            <div class="error">
+              <span class="underline"></span>
+              <p>please enter a message to send</p>
+            </div>
+            <textarea #contactMessage placeholder="ok, type your message."
+              [ngClass]="{
+                'zoom-1': contactMessage.value.length > 60,
+                'zoom-2': contactMessage.value.length > 170,
+                'zoom-3': contactMessage.value.length > 700
+              }" (keyup)="setSize(contactMessage);validateInput('message')"></textarea>
             <button class="next send" (click)="contactForm('toSend')">send</button>
             <button class="edit" (click)="contactForm('toEmail')">edit email</button>
+          </div>
+          <div class="status slide">
+              <span class="sending msg">sending message, please wait...</span>
+              <span class="success msg">message sent, thanks!</span>
+              <span class="err msg">error sending message :(</span>
+              <div class="loading">
+                <div>
+                  <div><div></div></div>
+                  <div><div></div></div>
+                </div>
+              </div>
+              <div class="checkmark">
+                <div><span></span></div>
+                <div><span></span></div>
+              </div>
+            <button class="edit" (click)="contactForm('toMessage');contactForm('close')">cancel</button>
           </div>
         </form>
       </div>
